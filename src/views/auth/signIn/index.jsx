@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, memo, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Auth } from "aws-amplify";
 // Chakra imports
@@ -24,11 +24,18 @@ import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import { useHistory } from 'react-router-dom';
 
-function SignIn() {
+
+const SignIn = () => {
+  const DEFAULT_ERROR = {
+    cognito: "",
+    blankfield: false
+  }
+  const [error, setError] = useState(DEFAULT_ERROR)
   // Chakra color mode
-  const [emailFieldValue, setEmailFieldValue] = React.useState(""); // State variable for email
-  const [passwordFieldValue, setPasswordFieldValue] = React.useState(""); // State variable for password
+  const [emailFieldValue, setEmailFieldValue] = useState(""); // State variable for email
+  const [passwordFieldValue, setPasswordFieldValue] = useState(""); // State variable for password
   const textColor = useColorModeValue("navy.700", "white");
   const textColorSecondary = "gray.400";
   const textColorDetails = useColorModeValue("navy.700", "secondaryGray.600");
@@ -44,7 +51,11 @@ function SignIn() {
     { bg: "secondaryGray.300" },
     { bg: "whiteAlpha.200" }
   );
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
+
+  const history = useHistory();
+
+
   const handleClick = () => setShow(!show);
   const handleSignIn = async () => {
     try {
@@ -54,12 +65,14 @@ function SignIn() {
         passwordFieldValue
       );
       console.log("User signed in: ", user);
+      history.push("/admin/profile")
       // Handle successful sign-in here (e.g., navigate to a new page)
     } catch (error) {
       console.error("Error signing in: ", error);
       // Handle sign-in errors here (e.g., display error message)
     }
   };
+
   return (
     <DefaultAuth illustrationBackground={illustration} image={illustration}>
       <Flex
@@ -203,4 +216,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default memo(SignIn);
