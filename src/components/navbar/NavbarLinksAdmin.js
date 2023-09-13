@@ -26,6 +26,7 @@ import { MdNotificationsNone, MdInfoOutline } from "react-icons/md";
 import { FaEthereum } from "react-icons/fa";
 import routes from "routes.js";
 import { ThemeEditor } from "./ThemeEditor";
+import { useHistory } from "react-router-dom";
 export default function HeaderLinks(props) {
   const { secondary } = props;
   // Chakra Color Mode
@@ -42,10 +43,12 @@ export default function HeaderLinks(props) {
     "14px 17px 40px 4px rgba(112, 144, 176, 0.06)"
   );
   const borderButton = useColorModeValue("secondaryGray.500", "whiteAlpha.200");
+  const history = useHistory();
   const handleSignOut = async () => {
     try {
       await Auth.signOut();
       console.log("User signed out successfully.");
+      history.push("/auth/sign-in");
       // Perform any additional tasks you want after sign-out
     } catch (error) {
       console.error("Error signing out: ", error);
@@ -195,7 +198,7 @@ export default function HeaderLinks(props) {
               href="https://horizon-ui.com/pro?ref=horizon-chakra-free"
             >
               <Button w="100%" h="44px" mb="10px" variant="brand">
-                Buy Horizon UI PRO
+                Mockup
               </Button>
             </Link>
             <Link
@@ -221,7 +224,7 @@ export default function HeaderLinks(props) {
                 color={textColor}
                 bg="transparent"
               >
-                Try Horizon Free
+                Mockup
               </Button>
             </Link>
           </Flex>

@@ -10,6 +10,7 @@ import { Amplify } from "aws-amplify";
 import config from "views/auth/signIn/config.json";
 import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
+import RouteWrapper from "views/RouteWrapper";
 
 const AppContext = createContext();
 
@@ -24,6 +25,7 @@ Amplify.configure({
 
 const App = () => {
   const [contextData, setContextData] = useState({});
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
     <AppContext.Provider value={{ contextData, setContextData }}>
@@ -35,7 +37,7 @@ const App = () => {
                 <Route path={`/auth`} component={AuthLayout} />
                 <Route path={`/admin`} component={AdminLayout} />
                 <Route path={`/rtl`} component={RtlLayout} />
-                <Redirect from="/" to="/admin" />
+                <Redirect from="/" to="/auth/sign-in" />
               </Switch>
             </HashRouter>
           </ThemeEditorProvider>

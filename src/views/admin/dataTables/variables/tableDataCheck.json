@@ -15,9 +15,7 @@
   },
   {
     "name": "Venus DB PRO",
-    "quantity": 1485,
     "date": "21.Feb.2021",
-    "progress": 35.4,
     "files": [
       {
         "id": 1,
@@ -32,7 +30,7 @@
     "progress": 25
   },
   {
-    "name":"Venus 3D Asset",
+    "name": "Venus 3D Asset",
     "quantity": 858,
     "date": "24.Jan.2021",
     "progress": 100

@@ -8,7 +8,7 @@ import {
   Thead,
   Tr,
   useColorModeValue,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import React, { useMemo, memo } from "react";
 import {
@@ -62,7 +62,7 @@ const CheckTable = ({ columnsData, tableData }) => {
           fontWeight="700"
           lineHeight="100%"
         >
-          Uploaded Folders
+          New repository
         </Text>
         <Menu />
       </Flex>
@@ -111,20 +111,21 @@ const CheckTable = ({ columnsData, tableData }) => {
                           </Text>
                         </Flex>
                       );
-                    } else if (cell.column.Header === "DATE") {
-                      console.log("yyy", cell);
-                      data = (
-                        <Flex align="center">
-                          <Text
-                            me="10px"
-                            color={textColor}
-                            fontSize="sm"
-                            fontWeight="700"
-                          >
-                            {cell.value}
-                          </Text>
-                        </Flex>
-                      );
+                      // } else if (cell.column.Header === "DATE") {
+                      //   console.log("yyy", cell);
+                      //   data = (
+                      //     <Flex align="center">
+                      //       <Text
+                      //         me="10px"
+                      //         color={textColor}
+                      //         fontSize="sm"
+                      //         fontWeight="700"
+                      //       >
+                      //         {cell.value}
+                      //       </Text>
+                      //     </Flex>
+                      //   );
+                      // }
                     }
                     return (
                       <Td
@@ -139,12 +140,10 @@ const CheckTable = ({ columnsData, tableData }) => {
                     );
                   })}
                 </Tr>
-                {row?.original?.files?.map(file => (
+                {row?.original?.files?.map((file) => (
                   <Tr key={file.name}>
                     <Td colSpan="2">
-                      <Text marginLeft={4}>
-                        {`┗  ${file.name}`}
-                      </Text>
+                      <Text marginLeft={4}>{`┗  ${file.name}`}</Text>
                     </Td>
                   </Tr>
                 ))}
@@ -160,70 +159,61 @@ const CheckTable = ({ columnsData, tableData }) => {
 const TreeDirectoryTable = () => {
   const columns = [
     {
-      Header: 'Name',
-      accessor: 'name'
+      Header: "Name",
+      accessor: "name",
     },
-    {
-      Header: 'Date',
-      accessor: 'date'
-    }
+    // {
+    //   Header: "Date",
+    //   accessor: "date",
+    // },
   ];
 
   const data = [
     {
       name: "AAA",
       date: "09/09/2023",
-      files: [
-        { name: "file1" },
-        { name: "file2" }
-      ]
+      files: [{ name: "file1" }, { name: "file2" }],
     },
     {
       name: "BBB",
       date: "10/09/2023",
-      files: []
+      files: [],
     },
     {
       name: "CCC",
       date: "11/09/2023",
-      files: []
-    }
+      files: [],
+    },
   ];
-  
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow
-  } = useTable({
-    columns,
-    data
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({
+      columns,
+      data,
+    });
 
   return (
     <table {...getTableProps()}>
       <thead>
-        {headerGroups.map(headerGroup => (
+        {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
           </tr>
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row) => {
           prepareRow(row);
           return (
             <>
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
               </tr>
-              {row.original.files.map(file => (
+              {row.original.files.map((file) => (
                 <tr key={file.name}>
                   <td colSpan="2">{file.name}</td>
                 </tr>

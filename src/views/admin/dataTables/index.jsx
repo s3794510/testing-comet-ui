@@ -15,20 +15,22 @@ import tableDataColumns from "views/admin/dataTables/variables/tableDataColumns.
 import tableDataComplex from "views/admin/dataTables/variables/tableDataComplex.json";
 import React, { useState, useEffect, memo } from "react";
 import axios from "axios";
-
+import Upload from "../profile/components/Upload";
 const Settings = () => {
   // Chakra Color Mode
   return (
     <Box pt={{ base: "130px", md: "80px", xl: "80px" }}>
       <SimpleGrid
         mb="20px"
-        columns={{ sm: 1, md: 1 }}
+        columns={{ sm: 2, md: 1 }}
         spacing={{ base: "20px", xl: "20px" }}
       >
         {/* <DevelopmentTable
           columnsData={columnsDataDevelopment}
           tableData={tableDataDevelopment}
         /> */}
+        <Upload />
+
         <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
         {/* <ColumnsTable
           columnsData={columnsDataColumns}
@@ -41,6 +43,6 @@ const Settings = () => {
       </SimpleGrid>
     </Box>
   );
-}
+};
 
-export default memo(Settings)
+export default memo(Settings);
